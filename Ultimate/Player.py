@@ -38,7 +38,7 @@ class Player:
                 return False
 
 
-    def get_move(self, board, prev_move):
+    def get_move(self, board, prev_move, inp_choice):
         while True:
             if prev_move[2:4] == (200, 200):
                 inp_move = input(self.get_name() + " please enter your move (super_row super_col inner_row inner_col): ")

@@ -110,7 +110,7 @@ class ultimateBoard:
         return self.arr
 
     def get_choice(self, choice_no):
-        return self.choice[choice_no]
+        return self.choice[choice_no%2]
 
     def is_illegal_move(self, arr, move):
         i = move[0]

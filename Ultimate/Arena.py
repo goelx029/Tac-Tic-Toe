@@ -30,7 +30,7 @@ class Arena:
             prev_move = recent_move
             if self.board.get_arr()[recent_move[-2]][recent_move[-1]].get_status() != " ":
                 prev_move = (200, 200, 200, 200)
-            recent_move = self.players[counter % 2].get_move(self.board, prev_move)
+            recent_move = self.players[counter % 2].get_move(self.board, prev_move, counter)
             if self.board.add_move(recent_move, counter%2):
                 print(self.board)
                 counter += 1
