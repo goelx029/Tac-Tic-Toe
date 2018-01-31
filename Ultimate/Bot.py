@@ -1,4 +1,5 @@
 import random
+import time
 
 
 class Bot:
@@ -129,6 +130,14 @@ class Bot:
 
         return list(succ_d.keys())[list(succ_d.values()).index(max(succ_d.values()))]
 
+    def strategy_ultimate(self, u_board, inp_choice):
+        choice = u_board.get_choice(inp_choice)
+        user_choice = u_board.get_choice(inp_choice-1)
+        super_arr = u_board.get_arr()
+        succ_d = {(i, j): self.get_succ_rate(super_arr[i][j].get_arr(), choice, user_choice) for i in range(len(super_arr)) for j in range(len(super_arr[i])) if super_arr[i][j].get_status() == " "}
+
+        return list(succ_d.keys())[list(succ_d.values()).index(max(succ_d.values()))]
+
     def get_succ_rate(self, arr, bot_choice, user_choice):
         bot_choice_freq = 0
         user_choice_freq = 0
@@ -143,8 +152,10 @@ class Bot:
         return (bot_choice_freq - user_choice_freq)
 
     def get_move(self, board, prev_move, inp_choice):
+        if not prev_move[:2] == (200, 200):
+            self.pass_time(5)
         if prev_move[2:4] == (200, 200):
-            print("Laude LAG GAYE")
+            return self.get_move(board, (200, 200)+self.strategy_ultimate(board, inp_choice), inp_choice)
         else:
             '''first get the attack and defense. If they dont work then in strategy think about the place you want the player to go to'''
             arr = board.get_arr()
@@ -158,6 +169,15 @@ class Bot:
                 return (prev_move[2], prev_move[3]) + defense
 
             return (prev_move[2], prev_move[3]) + self.strategy(board, arr[prev_move[2]][prev_move[3]], inp_choice)
+
+    # a simple function to display that the bot is thinking while passing time.
+    def pass_time(self, time_in_sec):
+        print ("Bot is thinking its next move! ")
+        for i in range(time_in_sec):
+            start = time.time()
+            while time.time() - start < 1:
+                a = 1
+            print (".")
 
 
     def __str__(self):

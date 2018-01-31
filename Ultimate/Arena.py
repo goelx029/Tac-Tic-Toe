@@ -23,7 +23,7 @@ class Arena:
                 inner_col = l_moves[3]
                 recent_move = (super_row, super_col, inner_row, inner_col)
                 flag = self.board.add_move(recent_move, (counter) % 2)
-                print (self.board)
+                print(str(self.board) + "\n\n")
                 counter += 1
 
         while counter < 81:
@@ -32,7 +32,7 @@ class Arena:
                 prev_move = (200, 200, 200, 200)
             recent_move = self.players[counter % 2].get_move(self.board, prev_move, counter)
             if self.board.add_move(recent_move, counter%2):
-                print(self.board)
+                print(str(self.board) + "\n\n")
                 counter += 1
                 flag = self.board.check_win(recent_move)
                 if flag:

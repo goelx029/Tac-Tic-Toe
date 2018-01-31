@@ -1,11 +1,10 @@
 import random
+import time
 
 
 class Bot:
     def __init__(self, name="Default Computer Bot"):
         self.name = name
-        self.moves = [(200, 200), (200, 200), (200, 200)]
-        self.counter = 0
 
     def set_name(self, input_name):
         self.name = input_name
@@ -13,10 +12,7 @@ class Bot:
     def get_name(self):
         return self.name
 
-    def get_moves(self):
-        return self.moves
-
-    def attacking(self, board, inp_choice):
+    '''def attacking(self, board, inp_choice):
         choice = board.get_choice((inp_choice)%2)
         arr = board.get_arr()
         # check diagonally
@@ -166,21 +162,56 @@ class Bot:
                 return False
             else:
                 print ("Illegal Move!! Cannot Move here")
+                return True'''
+
+
+    def is_illegal_move(self, arr, move):
+
+        '''
+        move is a tuple with 3 elements. (i, j, k)
+        i -> board_no
+        j -> row_no
+        k -> col_no
+        '''
+
+        board_no = move[0]
+        row_no = move[1]
+        col_no = move[2]
+
+        if (board_no < 0 or row_no < 0 or col_no < 0) or (
+                    board_no >= len(arr) or row_no >= len(arr[0]) or col_no >= len(arr[0][0])):
+            print ("Illegal Move!! Out of Bounds")
+            return True
+        else:
+            if arr[board_no][row_no][col_no] != " ":
+                print ("Illegal Move!! Place Already Filled!!!")
                 return True
+            return False
 
 
-    def get_move(self, board, inp_choice):
+    def get_move(self, board):
+        # board is used to get the state of the array for checking illegal move
         arr = board.get_arr()
 
-        attack = self.attacking(board, inp_choice)
-        if attack != (len(arr), len(arr)):
-            return attack
+        legal = False
 
-        defense = self.defensive(board, inp_choice)
-        if defense != (len(arr), len(arr)):
-            return defense
+        self.pass_time(3)
+        while not legal:
+            bot_move = (int(random.random()*len(arr)), int(random.random()*len(arr)), int(random.random()*len(arr)))
+            if not self.is_illegal_move(board.get_arr(), bot_move):
+                legal = True
+                return bot_move
 
-        return self.strategy(board, inp_choice)
+
+    # a simple function to display that the bot is thinking while passing time.
+    def pass_time(self, time_in_sec):
+        print ("Bot is thinking its next move! ")
+        for i in range(time_in_sec):
+            start = time.time()
+            while time.time() - start < 1:
+                a = 1
+            print (".", " ")
+
 
     def __str__(self):
         return self.name + "!"

@@ -15,7 +15,7 @@ class Arena:
             move = self.players[counter % 2].get_move(self.board)
             if self.board.add_move(move, counter % 2):
                 print(self.board)
-                if counter >= 4:
+                if counter >= 7:
                     if self.board.check_win(move):
                         print(str(self.players[counter % 2]) + "Won")
                         return 0
