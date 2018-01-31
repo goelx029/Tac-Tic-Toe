@@ -3,61 +3,15 @@ import Player
 import Bot
 
 
+#Arena - Class that implements the whole game by bringing together all the elemnts
+
+
 class Arena:
     def __init__(self, name="Default", inp_players = []):
         self.board = Board.TraditionalBoard()
         self.players = inp_players
 
-    '''def draw_board(self, t):
-        ########################
-        t.penup()
-        t.goto(0, 100)
-        t.pendown()
-        t.pensize(10)
-        t.goto(300, 100)
-        ########################
-        t.penup()
-        t.goto(0, 200)
-        t.pendown()
-        t.goto(300, 200)
-        ########################
-        t.penup()
-        t.goto(100, 0)
-        t.pendown()
-        t.goto(100, 300)
-        ########################
-        t.penup()
-        t.goto(200, 0)
-        t.pendown()
-        t.goto(200, 300)
-
-    def draw_o(self, y, x):
-        x = 100 * x + 50
-        y = 100 * y + 50
-        turtle.penup()
-        turtle.goto(x, y - 40)
-        turtle.pendown()
-        turtle.pensize(2)
-        turtle.pencolor("red")
-        turtle.circle(40)
-
-    def draw_x(self, y, x):
-        x = 100 * x + 50
-        y = 100 * y + 50
-        turtle.pensize(2)
-        turtle.pencolor("blue")
-        turtle.penup()
-        turtle.goto(x - 40, y - 40)
-        turtle.pendown()
-        turtle.setheading(45)
-        turtle.fd(80 * 1.414)
-        turtle.penup()
-        turtle.goto(x - 40, y + 40)
-        turtle.pendown()
-        turtle.setheading(-45)
-        turtle.fd(80 * 1.414)
-        turtle.setheading(0)'''
-
+    # a simple play() function that keeps on asking the players for input move until the game is over
     def play(self):
         print(self.board)
         counter = 0

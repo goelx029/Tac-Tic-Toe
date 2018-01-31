@@ -1,4 +1,5 @@
 # a board is defined as a 3X3 array with each spot being a string (" ", "O", "X")
+# This board class is the backbone of the whole game.
 
 
 class TraditionalBoard:
@@ -9,12 +10,17 @@ class TraditionalBoard:
         self.all_x = ["X" for i in range(3)]
         self.all_o = ["O" for i in range(3)]
 
+
+    #getters and setters
     def get_arr(self):
         return self.arr
 
     def get_choice(self, num):
         return self.choice[num%2]
 
+
+    # is_illegal_move - returns a boolean based on whether the move provided by either Player or Bot is illegal
+    # illegal means - out of bounds, at a place already occupied
     def is_illegal_move(self, move):
         i = move[0]
         j = move[1]
@@ -28,6 +34,8 @@ class TraditionalBoard:
             else:
                 return False
 
+
+    # move - function that actually takes an input move and updates the correct place on the board.
     def move(self, move, choice):
         if self.is_illegal_move(move):
             return False
@@ -35,6 +43,7 @@ class TraditionalBoard:
             self.arr[move[0]][move[1]] = self.choice[choice]
             return True
 
+    # function that checks whether someone won or not
     def check_win(self, move):
         i = move[0]
         j = move[1]

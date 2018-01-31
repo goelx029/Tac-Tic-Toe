@@ -2,17 +2,23 @@ import random
 import time
 
 
+# Bot class - Implements the functionality of a Computer Bot.
+# This class includes all the functions required for the bot to play a move on the board
+
+
 class Bot:
     def __init__(self, name="Default Computer Bot"):
         self.name = name
         self.helper = [[0, 1, 2], [-1, 0, 1], [-2, -1, 0]]
 
+    # setters and getters for the member variables
     def set_name(self, input_name):
         self.name = input_name
 
     def get_name(self):
         return self.name
 
+    #function that returns a move based on possibility of winning in the next turn
     def attacking(self, board, inp_choice):
         choice = board.get_choice((inp_choice-1)%2)
         arr = board.get_arr()
@@ -65,6 +71,7 @@ class Bot:
         return (len(arr), len(arr))
 
 
+    # function that returns a move to stop the user from winning in their next turn
     def defensive(self, board, inp_choice):
         choice = board.get_choice(inp_choice)
         arr = board.get_arr()
@@ -116,6 +123,9 @@ class Bot:
 
         return (len(arr), len(arr))
 
+
+    # function that implements a strategy behavior for a move on the tic-tac-toe board
+    # Is more of like a heuristic method based on different types of strategies used.
     def strategy(self, board, inp_choice):
         choice = board.get_choice(inp_choice)
         arr = board.get_arr()
@@ -150,6 +160,8 @@ class Bot:
             ret_move = help_arr[random.randint(0, len(help_arr)-1)]
             return ret_move
 
+
+    # a simple function to display that the bot is thinking while passing time.
     def pass_time(self, time_in_sec):
         print ("Bot is thinking its next move! ")
         for i in range(time_in_sec):
@@ -159,6 +171,7 @@ class Bot:
             print (".", " ")
 
 
+    # get_move function checks whether it should attack, defend, or just use plain strategy for its next move
     def get_move(self, board, inp_choice):
         arr = board.get_arr()
 
